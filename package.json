@@ -1,9 +1,14 @@
 {
   "name": "blog",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.ts",
+  "type": "module",
   "scripts": {
-    "start": "nodemon --inspect index.js",
+    "build": "tsc",
+    "predev": "npm run build",
+    "dev": "cross-env NODE_ENV=development concurrently \"tsc --watch\" \"nodemon -q dist/index.js\"",
+    "prestart": "npm run build",
+    "start": "cross-env NODE_ENV=production node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,10 +27,18 @@
   "homepage": "https://github.com/tquocan04/first_nodejs_project#readme",
   "description": "",
   "dependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0"
   },
   "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^20.17.31",
+    "concurrently": "^9.1.2",
     "morgan": "^1.10.0",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }
